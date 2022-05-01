@@ -23,6 +23,11 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 <!-- - 📊 Official benchmark of AI models on each game -->
 <!-- - 🤝 Marketplace for reinforcement learning agents in "Miner" for industrial robotics (revenue sharing with contributor) -->
 
+### Progress
+- [ ] Base class for MineShaft environments
+- [ ] Environment for Thetan Arena
+- [ ] Single node MineShaft
+
 ### Social Media
 Follow our development Blog... (Twitter, pending)
 Join our chat room... (Discord, pending)
