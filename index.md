@@ -15,13 +15,13 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 
 ### Minestones
 - 🚀 An environment for AI to play Thetan Arena
-- 🪨 Training demo of AI playing Thetan Arena
+- :rock: Training demo of AI playing Thetan Arena
 - 🌔 Distributed training of AI on Thetan Arena with "miner nodes" connected to one MineShaft server
 - 🌠 Inferencing of trained AI playing Thetan Arena to mine cryptocurrecy
 - 👾 Public contribution of MineShaft supporting other games
 <!-- - 🤖 Public contribution of "Miner" by developing new reinforcement learning agents (Project `Miner`, to be announced later) -->
 <!-- - 📊 Official benchmark of AI models on each game -->
-<!-- - 🤝 Marketplace for reinforcement learning agents in "Miner" for industrial robotics (revenue sharing with contributor) -->
+<!-- - :handshake: Marketplace for reinforcement learning agents in "Miner" for industrial robotics (revenue sharing with contributor) -->
 
 ### Progress
 - [ ] Base class for MineShaft environments
@@ -36,10 +36,10 @@ Join our chat room... (Discord, pending)
 Tasks of status "Todos" or "In progress" on project kanban will be listed in issues. Fork, develop and sumbit pull request. 💖
 
 **Level of contributing:**
-- 👶 Test and issue report for bugs
-- 🧒 Read and improve our documentation, write more to help people using MineShaft
-- 🧑 Turn discussion in development channel into short Blog post
-- 🧓 Fork, develop, document and submit pull request
+- :baby: Test and issue report for bugs
+- :child: Read and improve our documentation, write more to help people using MineShaft
+- :adult: Turn discussion in development channel into short Blog post
+- :older_adult: Fork, develop, document and submit pull request
 - 💀 Maintain the source code, document and infrastructure
 
 > ⚠️ GitHub sponsors application on waitlist
@@ -47,7 +47,7 @@ Tasks of status "Todos" or "In progress" on project kanban will be listed in iss
 With your sponsor, we can hire experienced developer to boost our developemnt, maintain public MineShaft server, support more games and provide more supplementary information to our community (e.g. Official tutorial on AI training with MineShaft, workshop about developing reinforcement learning, technical support for your AI research with our tools).
 
 **Level of sponsorship:**
-- 🪙 Supportor
+- :coin: Supportor
 - 💵 Customer
 - 💳 Contributor
 - 💰 Partner
