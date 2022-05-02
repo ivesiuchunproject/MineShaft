@@ -29,8 +29,13 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 - [ ] Single node MineShaft
 
 ### Social Media
-Follow our development Blog... (Twitter, pending)
-Join our chat room... (Discord, pending)
+#### Follow our development
+Blog... (Twitter, pending)
+#### Join our chat room
+<center>
+  <iframe src="https://discord.com/widget?id=970501981317767218&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+  </iframe>
+</center>
 
 ### Contribute or Sponsor
 Tasks of status "Todos" or "In progress" on project kanban will be listed in issues. Fork, develop and sumbit pull request. 💖
@@ -52,4 +57,4 @@ With your sponsor, we can hire experienced developer to boost our developemnt, m
 - 💳 Contributor
 - 💰 Partner
 
-Contact our major maintainer through E-Mail [hello@sabie.ai](mailto:hello@sabie.ai?subject=TellMeMoreMineShaft&body=Hi)
+Contact our core maintainer through E-Mail [hello@sabie.ai](mailto:hello@sabie.ai?subject=TellMeMoreMineShaft&body=Hi)
