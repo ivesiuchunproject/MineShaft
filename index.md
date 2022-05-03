@@ -6,13 +6,15 @@
 
 Yes! You can use the MineShaft to mine cryptocurrencies through NFT Games.
 
-### About
-<!-- <center> -->
-<!-- <iframe width="880" height="495" src="https://www.youtube.com/embed/ixyb9yMW3ns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-<!-- </center> -->
-<!-- Remember of OpenAI Five? -->
+### An illustration
+How will it be like? Remember of OpenAI Five? We mean to beat OpenAI Five.
+<center>
+  <iframe width="880" height="495" src="https://www.youtube.com/embed/ixyb9yMW3ns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <p>OpenAI Five gameplay with OG</p>
+</center>
 
-We are a group of Gamer, Cryptocurrency miner and AI researcher excited by OpenAI Five that fights world champion. An idea was born after that show: AI that plays Thetan Arena with us and gain cryptocurrencies?
+### About
+We are a group of Gamer, Cryptocurrency miner and AI researcher excited by OpenAI Five that fights world champion. An idea was born one day: AI that plays Thetan Arena with us and gain cryptocurrencies?
 
 Project `MineShaft` aim to provide an OpenAI Gym compatible environment for reinforcement learning agent to play Thetan Arena. We will make it extensible to support other NFT games in the future. 🚀
 
@@ -33,7 +35,7 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 - [ ] Environment for Thetan Arena
 - [ ] Single node MineShaft
 - [ ] Multi node MineShaft
-<!--   - <img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/Multi-nodeIllustration.jpg?raw=true" style="display: block; width: 30%;" /> -->
+- [ ] <img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/Multi-nodeIllustration.jpg?raw=true" style="display: block; width: 30%;" />
 
 ### Social Media
 #### Follow our development
