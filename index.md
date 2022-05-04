@@ -38,13 +38,12 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 - [ ] <img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/Multi-nodeIllustration.jpg?raw=true" style="display: block; width: 30%;" />
 
 ### Social Media
-#### Follow our development
 Blog... (Twitter, pending)
-#### Join our chat room
-<center>
+Chat room... (Discord, debugging)
+<!-- <center>
   <iframe src="https://discord.com/widget?id=970501981317767218&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
   </iframe>
-</center>
+</center> -->
 
 ### Contribute or Sponsor
 Tasks of status "Todos" or "In progress" on project kanban will be listed in issues. Fork, develop and sumbit pull request. 💖
