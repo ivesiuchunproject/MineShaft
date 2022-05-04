@@ -14,13 +14,35 @@ class BaseEnv(gym.Env):
     ----------
     IO_MODE : Enum
         IO_MODE.API = direct access to game API
-	IO_MODE.SIMPLIFIED = simpilified observation_space and action_space
-	IO_MODE.FULL_CONTROL = screen and full keyboard and mouse control
+        IO_MODE.SIMPLIFIED = simpilified observation_space and action_space
+        IO_MODE.FULL_CONTROL = screen and full keyboard and mouse control
+    EXPLORE_MODE : Enum
+        IO_MODE.MATCH = reinforcement learning agent only take control during match
+        IO_MODE.FULL = reinforcement learning agent have full control since login
     """
     metadata = {'render.modes': ['human']}
     IO_MODE = Enum('IO_MODE', ('API', 'SIMPLIFIED', 'FULL_CONTROL'))
+    EXPLORE_MODE = Enum('EXPLORE_MODE', ('MATCH', 'FULL'))
 
-    def __init__(self, io_mode=IO_MODE.FULL_CONTROL):
+    def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
+                 explore_space=EXPLORE_MODE.MATCH):
+        """Initialize environment, defines the input (action_space)
+        and output (observation_space)
+        
+        Screen capture module shall be initialized here and gaming program
+        shall be started. `observation_space` and `action_space` will be
+        defined here, and `explore_space` will be defined here too.
+        
+        Parameters
+        ----------
+        io_mode : Enum, optional
+            Default input/output of the environment interacting with reinforcement
+            learning agent is `IO_MODE.FULL_CONTROL` which directly provide screen
+            capture as `observation_space` for reinforcement learning agent to
+            observe the state of environment and requires matrix of keys mapping to
+            a ANSI standard keyboard as keyboard input (allowing combined keys) plus
+            a vector descripting `(X, Y)` mouse moving distance or mouse click event.
+        """
         super(CustomEnv, self).__init__()
         # Define action and observation space
         # They must be gym.spaces objects
@@ -35,7 +57,7 @@ class BaseEnv(gym.Env):
         reward = self._get_reward()
         ob = np.array(sct.grab(monitor))
         episode_over = False
-	info = {}
+        info = {}
         return observation, reward, done, info
 
     def reset(self):
