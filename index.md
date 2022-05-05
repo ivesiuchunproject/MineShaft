@@ -1,10 +1,11 @@
 ## Welcome to MineShaft
 **TL;DR**
-> We turn GameFi into OpenAI Gym compatible environment allowing you to play it with a deep reinforcement learning agent to play it for you!
+> We turn GameFi into OpenAI Gym compatible environment, contribute your computation power to train deep reinforcement learning agent.
 
-<img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/minersOvertime.png?raw=true" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" />
+<!-- <img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/minersOvertime.png?raw=true" style="display: block; margin-left: auto; margin-right: auto; width: 50%;" /> -->
+<img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/Multi-nodeIllustration.jpg?raw=true" style="display: block; width: 50%;" />
 
-Yes! You can use the MineShaft to mine cryptocurrencies through NFT Games.
+And yes... You can use the MineShaft to mine cryptocurrencies through NFT Games too.
 
 ### An illustration
 How will it be like? Remember of OpenAI Five? We mean to beat OpenAI Five.
@@ -35,7 +36,6 @@ In old days cryptocurrecy mining does not give much value but cost high power co
 - [ ] Environment for Thetan Arena
 - [ ] Single node MineShaft
 - [ ] Multi node MineShaft
-- [ ] <img src="https://github.com/Kush-Gold-Rush/MineShaft/blob/gh-pages/img/Multi-nodeIllustration.jpg?raw=true" style="display: block; width: 30%;" />
 
 ### Social Media
 Blog... (Twitter, pending)
@@ -45,7 +45,7 @@ Chat room... (Discord, debugging)
   </iframe>
 </center> -->
 
-### Contribute or Sponsor
+### Contribute
 Tasks of status "Todos" or "In progress" on project kanban will be listed in issues. Fork, develop and sumbit pull request. 💖
 
 **Level of contributing:**
@@ -54,15 +54,3 @@ Tasks of status "Todos" or "In progress" on project kanban will be listed in iss
 - ✍️ Turn discussion in development channel into short Blog post
 - 🔧 Fork, develop, document and submit pull request
 - 🚧 Maintain the source code, document and infrastructure
-
-> ⚠️ GitHub sponsors application on waitlist
-
-With your sponsor, we can hire experienced developer to boost our developemnt, maintain public MineShaft server, support more games and provide more supplementary information to our community (e.g. Official tutorial on AI training with MineShaft, workshop about developing reinforcement learning, technical support for your AI research with our tools).
-
-**Level of sponsorship:**
-- 👛 Supportor
-- 💵 Customer
-- 💳 Contributor
-- 💰 Partner
-
-Contact our core maintainer through E-Mail [hello@sabie.ai](mailto:hello@sabie.ai?subject=TellMeMoreMineShaft&body=Hi)
