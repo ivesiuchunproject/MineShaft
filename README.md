@@ -22,8 +22,8 @@ python3 -m pip install -r requirenments.txt
 
 Open your favourite editor and change anything to see what will happen.
 
-Before submitting pull request, please read instructions in [CONTRIBUTING.md](CONTRIBUTING.md)
-to prevent reject of pull request ( 🚧 `400 Bad Request`).
+> ⚠️ Before submitting pull request, please read instructions in [CONTRIBUTING.md](CONTRIBUTING.md)
+to prevent reject of pull request ( 🚧 `400 Bad Request`) and make both of us happy ☕.
 
 ## Functional requirements
 ### Initialize environment
