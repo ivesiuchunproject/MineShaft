@@ -20,6 +20,9 @@ class ThetanArenaEnv(BaseEnv):
     def _screen_cap(self):
         pass
     
+    def _keyboard_press(self, ascii_list):
+        pass
+    
     def _mouse_move(self, x, y):
         pass
     
