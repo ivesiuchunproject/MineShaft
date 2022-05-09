@@ -76,7 +76,7 @@ class BaseEnv(gym.Env):
             for screen capture or data captured from game's Application Programming Interface
             (also as the input shape of the reinforcement learning agent).
         """
-        super(CustomEnv, self).__init__()
+        super(BaseEnv, self).__init__()
         # Define action and observation space
         # They must be gym.spaces objects
         if io_mode == IO_MODE.FULL_CONTROL:
