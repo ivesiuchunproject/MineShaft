@@ -8,6 +8,12 @@ class ThetanArenaEnv(BaseEnv):
     def step(self, action):
         pass
     
+    def reset(self):
+        pass
+    
+    def close(self):
+        pass
+    
     def _take_action(self, action):
         pass
     
