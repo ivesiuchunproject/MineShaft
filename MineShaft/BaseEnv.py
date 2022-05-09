@@ -121,7 +121,8 @@ class BaseEnv(gym.Env):
         ----------
         action :
             Matrix with the same shape as `self.action_space` where for
-            keybaord part environment take value `> 0` as press or hold.
+            keybaord part environment take value `> 0` as press or hold
+            and take value `< 0` as `keyup` or nothing.
             For mouse part environment take value `(x, y)` as the
             percentage of screen width/height to move the mouse and the
             clicking part environment take value `> 0` as press or hold.
