@@ -20,10 +20,31 @@ class ThetanArenaEnv(BaseEnv):
     def _screen_cap(self):
         pass
     
-    def _mouse_move(self, x, y):
+    def _keyboard_input(self, action):
+        # scan and find keyboard action
+        # key press # self._keyboard_press(ascii_list)
+        # key release # self._keyboard_release(ascii_list)
+        pass
+    
+    def _keyboard_press(self, ascii_list):
+        pass
+
+    def _keyboard_release(self, ascii_list):
+        pass
+    
+    def _mouse_move(self, action):
         pass
     
     def _mouse_click(self, left, right):
+        # scan and find mouse action
+        # mouse press #self._mouse_press(left, right)
+        # mouse release #self._mouse_release(left, right)
+        pass
+    
+    def _mouse_press(self, left, right):
+        pass
+    
+    def _mouse_release(self, left, right):
         pass
     
     def _start_game(self):

@@ -81,7 +81,7 @@ class BaseEnv(gym.Env):
         # They must be gym.spaces objects
         if io_mode == IO_MODE.FULL_CONTROL:
             # 101 keyboard + mouse (move + click + scroll)
-            ACTION_SHAPE = (101 + (2 + 2 + 1),)
+            ACTION_SHAPE = (2, 101 + (2 + 2 + 1))
             # screen height
             HEIGHT = 512
             # screen width
@@ -90,7 +90,7 @@ class BaseEnv(gym.Env):
             N_CHANNELS = 3
         elif io_mode == IO_MODE.SIMPLIFIED:
             # keyboard (WASD/SPACE/12345) + mouse (move + click + scroll)
-            ACTION_SHAPE = (11 + (2 + 2 + 1),)
+            ACTION_SHAPE = (2, 11 + (2 + 2 + 1))
             # screen height
             HEIGHT = 512
             # screen width
@@ -120,11 +120,16 @@ class BaseEnv(gym.Env):
         Parameters
         ----------
         action :
-            Matrix with the same shape as `self.action_space` where for
-            keybaord part environment take value `> 0` as press or hold.
-            For mouse part environment take value `(x, y)` as the
-            percentage of screen width/height to move the mouse and the
-            clicking part environment take value `> 0` as press or hold.
+            Composed of two matrices indicating the action is a key down
+            or key up event of keyboard and mouse. The composed matrix has
+            the same shape as `self.action_space`. For any value greater
+            than 0 in the first matrix, environment take it as key down
+            event. For any value greater than 0 in the second matrix the
+            environment take it as key up event. The only exception is
+            the matrix elements of mouse move and mouse scroll, the value
+            means `(x, y)` on screen (move to `int(x * screen_width),
+            int(y * screen_height)`) and `z` percentage of scroll wheel
+            on up and down.
 
         Returns
         -------
