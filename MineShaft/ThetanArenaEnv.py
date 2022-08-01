@@ -49,6 +49,32 @@ class ThetanArenaEnv(BaseEnv):
     
     def _start_game(self):
         pass
+        """
+        This is the code of open Enter Tutorial of Deathmatch by hardcode the mouse location
+        
+        This code only work on pc with the screen resolution is 1980 x 1080
+        
+        The code need to run after enter the game of TheTan Arena
+        """
+        pyautogui.moveTo(1347,989,1) 
+        
+        pyautogui.leftClick()
+
+        time.sleep(2)
+        
+        pyautogui.dragTo(300, 400, 2, button='left')
+       
+        time.sleep(2)
+        
+        pyautogui.moveTo(1451,317,2)
+        
+        pyautogui.leftClick()
+        
+        time.sleep(2)
+        
+        pyautogui.moveTo(948,754,2)
+        
+        pyautogui.leftClick()
     
     def _end_game(self):
         pass
