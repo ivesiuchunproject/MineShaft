@@ -50,6 +50,7 @@ class ThetanArenaEnv(BaseEnv):
     def _start_game(self):
         os.startfile('"C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"')
         """This is an example for how to open the Thetan Areana.exe.
+        
     """
     
     def _end_game(self):
