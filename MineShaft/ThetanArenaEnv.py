@@ -39,6 +39,7 @@ class ThetanArenaEnv(BaseEnv):
         # scan and find mouse action
         # mouse press #self._mouse_press(left, right)
         # mouse release #self._mouse_release(left, right)
+        hihi
         pass
     
     def _mouse_press(self, left, right):
