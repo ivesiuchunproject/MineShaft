@@ -1,5 +1,6 @@
 from .BaseEnv import BaseEnv
 import subprocess
+p=None
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
@@ -59,6 +60,8 @@ class ThetanArenaEnv(BaseEnv):
         
         progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
         filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+        
+        global p
 
         p = subprocess.Popen([filepath,progname])
         
@@ -66,17 +69,7 @@ class ThetanArenaEnv(BaseEnv):
     def _end_game(self):
         """
         This is the code for end game
-        
-        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
-        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
-        is hardcode.
     """
-
-        progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
-        filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
-
-        p = subprocess.Popen([filepath,progname])
-
         p.terminate()
     
     def _reset_game(self):
