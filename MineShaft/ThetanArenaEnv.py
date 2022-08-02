@@ -70,7 +70,7 @@ class ThetanArenaEnv(BaseEnv):
         """
         This is the code for end game
     """
-        p.terminate()
+        self.p.terminate()
     
     def _reset_game(self):
         pass
