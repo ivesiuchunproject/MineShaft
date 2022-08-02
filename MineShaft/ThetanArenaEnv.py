@@ -14,6 +14,11 @@ class ThetanArenaEnv(BaseEnv):
         """
         super(ThetanArenaEnv, self).__init__()
         
+        """
+        use try and catch statement to catch exception 
+        when the game is not installed in the provided path, 
+        then raise the exception for the upper level to handle
+        """
         try:
             os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
         except:
