@@ -1,4 +1,5 @@
 from .BaseEnv import BaseEnv
+import subprocess
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
@@ -59,9 +60,8 @@ class ThetanArenaEnv(BaseEnv):
         and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
         is hardcode.
     """
-        import subprocess
         
-        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena.Ink"
+        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena"
         progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
 
         p = subprocess.Popen([progname,filepath])
@@ -79,9 +79,8 @@ class ThetanArenaEnv(BaseEnv):
         and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
         is hardcode.
     """
-        import subprocess
 
-        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena.Ink"
+        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena"
         progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
 
         p = subprocess.Popen([progname,filepath])
