@@ -1,9 +1,16 @@
 from .BaseEnv import BaseEnv
+import os
 
 class ThetanArenaEnv(BaseEnv):
-    def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
-                 explore_space=EXPLORE_MODE.FULL):
+    def __init__(self, io_mode=BaseEnv.IO_MODE.FULL_CONTROL,
+                 explore_space=BaseEnv.EXPLORE_MODE.FULL):
+        """This is the code of start game
+        The hardcode path to open the game:
+        "C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe"
+        """
         super(ThetanArenaEnv, self).__init__()
+        
+        os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
         
     def step(self, action):
         pass
