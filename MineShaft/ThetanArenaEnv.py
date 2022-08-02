@@ -48,14 +48,34 @@ class ThetanArenaEnv(BaseEnv):
         pass
     
     def _start_game(self):
-        """This is an example for how to open the Thetan Areana.exe.
-        The path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" is hardcode.
+        """
+        This is the code for start game
+        
+        "import subprocess"
+        
+        First it need to import the subprocess to use the software
+        
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        is hardcode.
     """
-        os.startfile('"C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"')
+        import subprocess
+        
+        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena.Ink"
+        progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+
+        p = subprocess.Popen([progname,filepath])
         
     
     def _end_game(self):
-        pass
+        """
+        This is the code for end game
+        
+        "import subprocess"
+        
+        First it need to import the subprocess to use the software
+    """
+        p.terminate()
     
     def _reset_game(self):
         pass
