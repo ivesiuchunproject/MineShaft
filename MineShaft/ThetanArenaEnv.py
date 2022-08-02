@@ -57,10 +57,10 @@ class ThetanArenaEnv(BaseEnv):
         is hardcode.
     """
         
-        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena"
-        progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+        progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
+        filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
 
-        p = subprocess.Popen([progname,filepath])
+        p = subprocess.Popen([filepath,progname])
         
     
     def _end_game(self):
@@ -72,10 +72,10 @@ class ThetanArenaEnv(BaseEnv):
         is hardcode.
     """
 
-        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena"
-        progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+        progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
+        filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
 
-        p = subprocess.Popen([progname,filepath])
+        p = subprocess.Popen([filepath,progname])
 
         p.terminate()
     
