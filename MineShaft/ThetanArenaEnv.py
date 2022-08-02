@@ -32,8 +32,26 @@ class ThetanArenaEnv(BaseEnv):
     def _keyboard_release(self, ascii_list):
         pass
     
-    def _mouse_move(self, action):
-        pass
+    def _mouse_move(self, Width, Height):
+        """
+    This is the code for move to the location enter
+    of the percentage of screen width and height.
+    
+    "import os"
+        
+        First it need to import pyautogui for use the software
+    
+    Parameters
+    ----------
+    Width : int
+        percentage of screen width
+    Heigth : int
+        percentage of screen height
+        
+    """
+        import pyautogui
+        
+        pyautogui.moveTo(Width, Height, duration=0.2)
     
     def _mouse_click(self, left, right):
         # scan and find mouse action
@@ -48,11 +66,7 @@ class ThetanArenaEnv(BaseEnv):
         pass
     
     def _start_game(self):
-        """This is an example for how to open the Thetan Areana.exe.
-        The path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" is hardcode.
-    """
-        os.startfile('"C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"')
-        
+        pass        
     
     def _end_game(self):
         pass
