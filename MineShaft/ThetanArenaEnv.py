@@ -1,4 +1,5 @@
 from .BaseEnv import BaseEnv
+import subprocess
 import os
 
 class ThetanArenaEnv(BaseEnv):
@@ -21,6 +22,8 @@ class ThetanArenaEnv(BaseEnv):
         """
         try:
             os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
+            # can this line be directly replaced by the following?
+            # self._start_game()
         except:
             raise Exception("the game is not installed")
 
@@ -66,7 +69,21 @@ class ThetanArenaEnv(BaseEnv):
     def _mouse_release(self, left, right):
         pass
     
-    def _start_game(self):        
+    def _start_game(self):
+        """
+        This is the code for start game
+        
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        is hardcode.
+    """
+        
+        progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
+        filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+       
+        self.p = subprocess.Popen([filepath,progname])
+
+    def _enter_match(self):        
         """
         This is the code of open Enter Tutorial of Deathmatch by hardcode the mouse location
         This code only work on pc with the screen resolution is 1980 x 1080
@@ -87,7 +104,10 @@ class ThetanArenaEnv(BaseEnv):
         pyautogui.leftClick()
     
     def _end_game(self):
-        pass
+        """
+        This is the code for end game
+    """
+        self.p.terminate()
     
     def _reset_game(self):
         pass
