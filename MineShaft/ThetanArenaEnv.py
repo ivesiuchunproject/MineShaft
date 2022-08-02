@@ -48,12 +48,18 @@ class ThetanArenaEnv(BaseEnv):
         pass
     
     def _start_game(self):
-        """This is an example for how to open the Thetan Areana.exe.
-        
-        The path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" is hardcode.
         """
-        os.startfile('"C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"')
+        This is the code of start game
         
+        "import os"
+        
+        First it need to import the os for use the software
+        
+        "os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")" This is the hardcode path to open the game
+        """
+        import os
+        
+        os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
     
     def _end_game(self):
         pass
