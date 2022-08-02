@@ -52,10 +52,6 @@ class ThetanArenaEnv(BaseEnv):
         """
         This is the code for start game
         
-        "import subprocess"
-        
-        First it need to import the subprocess to use the software
-        
         The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
         and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
         is hardcode.
@@ -70,10 +66,6 @@ class ThetanArenaEnv(BaseEnv):
     def _end_game(self):
         """
         This is the code for end game
-        
-        "import subprocess"
-        
-        First it need to import the subprocess to use the software
         
         The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
         and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
