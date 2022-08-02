@@ -74,7 +74,18 @@ class ThetanArenaEnv(BaseEnv):
         "import subprocess"
         
         First it need to import the subprocess to use the software
+        
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        is hardcode.
     """
+        import subprocess
+
+        filepath = "C:\\Users\\Public\\Desktop\\Thetan Arena.Ink"
+        progname = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+
+        p = subprocess.Popen([progname,filepath])
+
         p.terminate()
     
     def _reset_game(self):
