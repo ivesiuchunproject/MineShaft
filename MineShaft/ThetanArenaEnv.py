@@ -60,10 +60,8 @@ class ThetanArenaEnv(BaseEnv):
         
         progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
         filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
-        
-        global p
-
-        p = subprocess.Popen([filepath,progname])
+       
+        self.p = subprocess.Popen([filepath,progname])
         
     
     def _end_game(self):
