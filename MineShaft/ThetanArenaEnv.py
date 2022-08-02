@@ -1,6 +1,5 @@
 from .BaseEnv import BaseEnv
 import subprocess
-p=None
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
