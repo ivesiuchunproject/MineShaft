@@ -1,11 +1,32 @@
 from .BaseEnv import BaseEnv
 import subprocess
+import os
 
 class ThetanArenaEnv(BaseEnv):
-    def __init__(self, io_mode=IO_MODE.FULL_CONTROL,
-                 explore_space=EXPLORE_MODE.FULL):
+    def __init__(self, io_mode=BaseEnv.IO_MODE.FULL_CONTROL,
+                 explore_space=BaseEnv.EXPLORE_MODE.FULL):
+        """This is the code of start game
+        
+        Use try and catch statement to catch exception when the game is not installed in the provided path,
+        then raise the exception for the upper level to handle.
+
+        The hardcode path to open the game:
+        "C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe"
+        """
         super(ThetanArenaEnv, self).__init__()
         
+        """
+        use try and catch statement to catch exception 
+        when the game is not installed in the provided path, 
+        then raise the exception for the upper level to handle
+        """
+        try:
+            os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
+            # can this line be directly replaced by the following?
+            # self._start_game()
+        except:
+            raise Exception("the game is not installed")
+
     def step(self, action):
         pass
     
@@ -61,7 +82,26 @@ class ThetanArenaEnv(BaseEnv):
         filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
        
         self.p = subprocess.Popen([filepath,progname])
+
+    def _enter_match(self):        
+        """
+        This is the code of open Enter Tutorial of Deathmatch by hardcode the mouse location
+        This code only work on pc with the screen resolution is 1980 x 1080
+        The code need to run after enter the game of TheTan Arena
+        """
+        pyautogui.moveTo(1347,989,1)  
+        pyautogui.leftClick()
+        time.sleep(2)
         
+        pyautogui.dragTo(300, 400, 2, button='left')
+        time.sleep(2)
+        
+        pyautogui.moveTo(1451,317,2)
+        pyautogui.leftClick()
+        time.sleep(2)
+        
+        pyautogui.moveTo(948,754,2)
+        pyautogui.leftClick()
     
     def _end_game(self):
         """

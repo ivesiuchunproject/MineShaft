@@ -16,8 +16,13 @@ env.close()
 
 ## Getting started (developer)
 Install dependencies
-```
+```bash
 python3 -m pip install -r requirenments.txt
+```
+
+### Test Env with `PPO` (developer)
+```bash
+python3 test.py
 ```
 
 Open your favourite editor and change anything to see what will happen.
