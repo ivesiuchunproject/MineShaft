@@ -20,7 +20,7 @@ class ThetanArenaEnv(BaseEnv):
         then raise the exception for the upper level to handle
         """
         try:
-            os.startfile("C:\Program Files (x86)\Thetan Arena\Thetan Arena.exe")
+            self._start_game()
         except:
             raise Exception("the game is not installed")
 
@@ -66,26 +66,122 @@ class ThetanArenaEnv(BaseEnv):
     def _mouse_release(self, left, right):
         pass
     
-    def _start_game(self):        
+   def _start_game(self):
         """
-        This is the code of open Enter Tutorial of Deathmatch by hardcode the mouse location
-        This code only work on pc with the screen resolution is 1980 x 1080
-        The code need to run after enter the game of TheTan Arena
-        """
-        pyautogui.moveTo(1347,989,1)  
-        pyautogui.leftClick()
-        time.sleep(2)
+        This is the code for start game
         
-        pyautogui.dragTo(300, 400, 2, button='left')
-        time.sleep(2)
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        is hardcode.
+    """
         
-        pyautogui.moveTo(1451,317,2)
-        pyautogui.leftClick()
-        time.sleep(2)
+        progname = "C:\\Users\\Public\\Desktop\\Thetan Arena"
+        filepath = "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+       
+        self.p = subprocess.Popen([filepath,progname])
+
+    def _enter_match(self):  
+        '''
+        the method requires an image parameter which is in numpy.ndarray format
+        then it compares the image with screen capture
+        '''
+        def matching_with_screencap(tofind):
+		    '''
+            screen capture using pyautogui 
+            '''
+            screen = pyautogui.screenshot()
+
+            '''
+            change the capture to numpy array
+            '''
+            img = np.array(screen)
+
+            '''
+            since the matchtemplate() function requires 2 images with same format
+            so the below code is to convert the images to RBG format
+            '''
+            
+            tofind = cv.cvtColor(tofind, cv.COLOR_BGR2RGB)
+
+
+
+            background = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+              
+
+            '''
+            the below opencv function matchTemplate() receive 3 parameters, first 2 are images in 
+            numpy array, the third one is the opencv comparison algorithm. The function returns
+            a grayscale image, where each pixel denotes how much does the neighbourhood of that pixel 
+            match with template.
+            '''
+            result = cv.matchTemplate(background,tofind,cv.TM_CCOEFF_NORMED)
+            '''
+            the below minMaxLoc() function receives a parameter which is a grayscale image
+            then return 4 parameters:
+            1. the  thershold value of minimum match objects
+            2. the  thershold value of maximum match objects
+            3. the  coordinates of minimu match objects
+            4. the  coordinates of maximum match objects
+            '''
+            min_val,max_val,min_loc,max_loc = cv.minMaxLoc(result)
+            '''
+            the methond only returns the thershold value and location of the most suitable matching object
+            '''
+            return max_loc,max_val	
+
+        '''
+        change the current directory to the script folder so that relative path can be used
+        '''
+        folder_path = os.path.dirname(os.path.abspath(__file__))      
+        os.chdir(folder_path)
+         
+        import time 
+        '''
+        opencv read the find match image by file path
+        '''
+        tofind = cv.imread('../SourcePictures/findmatch2.png',cv.IMREAD_UNCHANGED) 
+        '''
+        using the above method
+        '''
+        loc,thershold = matching_with_screencap(tofind)
+
+        '''
+        using pyautogui to click the obtained coordinates
+        '''
+        pyautogui.moveTo(loc[0]-100,loc[1],duration =0.2)
+        pyautogui.click(button='left',duration=0.2)
         
-        pyautogui.moveTo(948,754,2)
-        pyautogui.leftClick()
-    
+        '''
+        similarly, using pyautogui to click the obtained coordinates
+        '''
+
+        tofind = cv.imread('../SourcePictures/deathmatch2.png',cv.IMREAD_UNCHANGED)  
+        loc2,thershold = matching_with_screencap(tofind)
+        if thershold>0.7:
+            pyautogui.moveTo(loc2[0]+250,loc2[1],duration =0.2)
+            pyautogui.click(button='left',duration=0.2)
+
+        else:
+            pyautogui.dragTo(loc[0]-400,loc[1],duration =0.2,button='left')
+            tofind = cv.imread('../SourcePictures/deathmatch2.png',cv.IMREAD_UNCHANGED)  
+            time.sleep(2)
+            loc2,thershold = matching_with_screencap(tofind)
+            if thershold<0.6:
+                print('no deathmatch game mode')
+                exit()
+            pyautogui.moveTo(loc2[0]+250,loc2[1],duration =0.2)
+            pyautogui.click(button='left',duration=0.2)
+
+        '''
+        again, using the above method to find and click the tutorial image
+        '''
+
+        tofind = cv.imread('../SourcePictures/tutor.png',cv.IMREAD_UNCHANGED)  
+        loc,thershold = matching_with_screencap(tofind)
+        pyautogui.moveTo(loc[0] ,loc[1],duration =0.2)
+        pyautogui.click(button='left',duration=0.2)
+         
+        
     def _end_game(self):
         pass
     
