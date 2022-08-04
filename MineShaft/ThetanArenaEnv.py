@@ -81,174 +81,193 @@ class ThetanArenaEnv(BaseEnv):
         self.p = subprocess.Popen([filepath,progname])
 
     def _enter_match(self):  
-        '''
-        the method requires an image parameter which is in numpy.ndarray format
-        then it compares the image with screen capture
-        '''
-        def matching_with_screencap(tofind):
-		    '''
-            screen capture using pyautogui 
-            '''
-            screen = pyautogui.screenshot()
-
-            '''
-            change the capture to numpy array
-            '''
-            img = np.array(screen)
-
-            '''
-            since the matchtemplate() function requires 2 images with same format
-            so the below code is to convert the images to RBG format
-            '''
-            
-            tofind = cv.cvtColor(tofind, cv.COLOR_BGR2RGB)
+        """
+	the method requires an image parameter which is in numpy.ndarray format
+	then it compares the image with screen capture
+	"""
+	import time
+	import os
+	import numpy as np
+	import pyautogui
+	import cv2 as cv
 
 
+	def matching_with_screencap(tofind):
+	    """
+	    screen capture using pyautogui
+	    """
+	    screen = pyautogui.screenshot()
 
-            background = cv.cvtColor(img, cv.COLOR_BGR2RGB)
-              
+	    """
+	    change the capture to numpy array
+	    """
+	    img = np.array(screen)
 
-            '''
-            the below opencv function matchTemplate() receive 3 parameters, first 2 are images in 
-            numpy array, the third one is the opencv comparison algorithm. The function returns
-            a grayscale image, where each pixel denotes how much does the neighbourhood of that pixel 
-            match with template.
-            '''
-            result = cv.matchTemplate(background,tofind,cv.TM_CCOEFF_NORMED)
-            '''
-            the below minMaxLoc() function receives a parameter which is a grayscale image
-            then return 4 parameters:
-            1. the  thershold value of minimum match objects
-            2. the  thershold value of maximum match objects
-            3. the  coordinates of minimu match objects
-            4. the  coordinates of maximum match objects
-            '''
-            min_val,max_val,min_loc,max_loc = cv.minMaxLoc(result)
-            '''
-            the methond only returns the thershold value and location of the most suitable matching object
-            '''
-            return max_loc,max_val	
+	    """
+	    since the matchtemplate() function requires 2 images
+	    with same format
+	    so the below code is to convert the images to RBG format
+	    """
 
-        '''
-        change the current directory to the script folder so that relative path can be used
-        '''
-        folder_path = os.path.dirname(os.path.abspath(__file__))      
-        os.chdir(folder_path)
-         
-        import time 
-        '''
-        opencv read the find match image by file path
-        '''
-        tofind = cv.imread('../SourcePictures/findmatch2.png',cv.IMREAD_UNCHANGED) 
-        '''
-        using the above method
-        '''
-        loc,thershold = matching_with_screencap(tofind)
+	    tofind = cv.cvtColor(tofind, cv.COLOR_BGR2RGB)
 
-        '''
-        using pyautogui to click the obtained coordinates
-        '''
-        pyautogui.moveTo(loc[0]-100,loc[1],duration =0.2)
-        pyautogui.click(button='left',duration=0.2)
-        
-        '''
-        similarly, using pyautogui to click the obtained coordinates
-        '''
+	    background = cv.cvtColor(img, cv.COLOR_BGR2RGB)
 
-        tofind = cv.imread('../SourcePictures/deathmatch2.png',cv.IMREAD_UNCHANGED)  
-        loc2,thershold = matching_with_screencap(tofind)
-        if thershold>0.7:
-            pyautogui.moveTo(loc2[0]+250,loc2[1],duration =0.2)
-            pyautogui.click(button='left',duration=0.2)
+	    """
+	    the below opencv function matchTemplate() receive 3 parameters,
+	    first 2 are images in
+	    numpy array, the third one is the opencv comparison algorithm.
+	    The function returns
+	    a grayscale image, where each pixel denotes how much does
+	    the neighbourhood of that pixel
+	    match with template.
+	    """
+	    result = cv.matchTemplate(background, tofind, cv.TM_CCOEFF_NORMED)
+	    """
+	    the below minMaxLoc() function receives a parameter which is a
+	    grayscale image
+	    then return 4 parameters:
+	    1. the  thershold value of minimum match objects
+	    2. the  thershold value of maximum match objects
+	    3. the  coordinates of minimu match objects
+	    4. the  coordinates of maximum match objects
+	    """
+	    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+	    """
+	    the methond only returns the thershold value and location of
+	    the most suitable matching object
+	    """
+	    return max_loc, max_val
 
-        else:
-            pyautogui.dragTo(loc[0]-400,loc[1],duration =0.2,button='left')
-            tofind = cv.imread('../SourcePictures/deathmatch2.png',cv.IMREAD_UNCHANGED)  
-            time.sleep(2)
-            loc2,thershold = matching_with_screencap(tofind)
-            if thershold<0.6:
-                print('no deathmatch game mode')
-                exit()
-            pyautogui.moveTo(loc2[0]+250,loc2[1],duration =0.2)
-            pyautogui.click(button='left',duration=0.2)
 
-        '''
-        again, using the above method to find and click the tutorial image
-        '''
+	"""
+	change the current directory to the script folder so that relative
+	path can be used
+	"""
+	folder_path = os.path.dirname(os.path.abspath(__file__))
+	os.chdir(folder_path)
 
-        tofind = cv.imread('../SourcePictures/tutor.png',cv.IMREAD_UNCHANGED)  
-        loc,thershold = matching_with_screencap(tofind)
-        pyautogui.moveTo(loc[0] ,loc[1],duration =0.2)
-        pyautogui.click(button='left',duration=0.2)
-	
-	'''
+
+	"""
+	opencv read the find match image by file path
+	"""
+
+	tofind = cv.imread("../SourcePictures/findmatch2.png", cv.IMREAD_UNCHANGED)
+
+	"""
+	using the above method
+	"""
+	loc, thershold = matching_with_screencap(tofind)
+
+	"""
+	using pyautogui to click the obtained coordinates
+	"""
+	pyautogui.moveTo(loc[0] - 100, loc[1], duration=0.2)
+	pyautogui.click(button="left", duration=0.2)
+
+	"""
+	similarly, using pyautogui to click the obtained coordinates
+	"""
+
+	tofind = cv.imread("../SourcePictures/deathmatch2.png", cv.IMREAD_UNCHANGED)
+	loc2, thershold = matching_with_screencap(tofind)
+	if thershold > 0.7:
+	    pyautogui.moveTo(loc2[0] + 250, loc2[1], duration=0.2)
+	    pyautogui.click(button="left", duration=0.2)
+
+	else:
+	    pyautogui.dragTo(loc[0] - 400, loc[1], duration=0.2, button="left")
+	    tofind = cv.imread(
+		"../SourcePictures/deathmatch2.png",
+		cv.IMREAD_UNCHANGED)
+	    time.sleep(2)
+	    loc2, thershold = matching_with_screencap(tofind)
+	if thershold < 0.6:
+	    print("no deathmatch game mode")
+	    exit()
+	    pyautogui.moveTo(loc2[0] + 250, loc2[1], duration=0.2)
+	    pyautogui.click(button="left", duration=0.2)
+
+	"""
+	again, using the above method to find and click the tutorial image
+	"""
+
+	tofind = cv.imread("../SourcePictures/tutor.png", cv.IMREAD_UNCHANGED)
+	loc, thershold = matching_with_screencap(tofind)
+	pyautogui.moveTo(loc[0], loc[1], duration=0.2)
+	pyautogui.click(button="left", duration=0.2)
+
+	"""
 	Determine if the Tutorial has started
-	'''
-	
-	'''
+	"""
+
+	"""
 	opencv read the image by file path for matching
-	'''
-	tofind = cv.imread('../SourcePictures/entertutor2.png',cv.IMREAD_UNCHANGED) 
-	'''
+	"""
+	tofind = cv.imread("../SourcePictures/entertutor2.png", cv.IMREAD_UNCHANGED)
+	"""
 	wait for 5 seconds as the game maybe loading
-	'''
+	"""
 	time.sleep(5)
-	'''
+	"""
 	time.time() return the current time
-	start_time store the current time 
-	'''
+	start_time store the current time
+	"""
 	start_time = time.time()
-	'''
+	"""
 	set a boolean to determind if the tutorial game is started
-	'''
+	"""
 	tutor_started = False
-	'''
+	"""
 	use a while loop to keep matching the screen capture and the required image
 	the loop will go on at most 20 seconds
 	if there is no match with thershold larger than 0.7 after 20seconds,
 	it is determinded that the tutorial is not started
-	'''
-	while time.time()-start_time <20 and tutor_started == False:
-		loc,thershold = matching_with_screencap(tofind) 
-		if thershold >0.7:
-			tutor_started= True
-	
-	'''
+	"""
+	while time.time() - start_time < 20 and not tutor_started:
+	    loc, thershold = matching_with_screencap(tofind)
+	    if thershold > 0.7:
+		tutor_started = True
+
+	"""
 	Determine if the Tutorial has finished
-	
+
 	only run if the tutorial is started
-	'''
-	if tutor_started : 
-		'''
-		since the game last for 3 minites, the matching will start after that 
-		'''
-		time.sleep(180)		
-		'''
-		opencv read the image by file path for matching
-		'''
-		
-		tofind = cv.imread('../SourcePictures/finishtutor.png',cv.IMREAD_UNCHANGED) 
-		
-		'''
-		similarly, set a boolean to determind if the game is finished and record the time
-		'''
-		
-		start_time = time.time()
-		tutor_ended = False
-		
-		'''
-		
-		use a while loop to keep matching the screen capture and the required image
-		the loop will go on at most 60 seconds
-		if there is no match with thershold larger than 0.7 after 60seconds,
-		it is determinded that the tutorial is not finished
-	
-		'''
-		 
-		while time.time()-start_time <60 and tutor_ended == False:
-			loc,thershold = matching_with_screencap(tofind) 
-			if thershold >0.7:
-				tutor_ended= True
+	"""
+	if tutor_started:
+	    """
+	    since the game last for 3 minites, the matching will start after that
+	    """
+	    time.sleep(180)
+	    """
+	    opencv read the image by file path for matching
+	    """
+
+	    tofind = cv.imread(
+		"../SourcePictures/finishtutor.png",
+		cv.IMREAD_UNCHANGED)
+
+	    """
+	    similarly, set a boolean to determind if the game is finished and
+	    record the time
+	    """
+
+	    start_time = time.time()
+	    tutor_ended = False
+
+	"""
+
+	use a while loop to keep matching the screen capture and the required image
+	the loop will go on at most 60 seconds
+	if there is no match with thershold larger than 0.7 after 60seconds,
+	it is determinded that the tutorial is not finished
+
+	"""
+
+	while time.time() - start_time < 60 and not tutor_ended:
+	    loc, thershold = matching_with_screencap(tofind)
+	    if thershold > 0.7:
+		tutor_ended = True
 		
 	
          
