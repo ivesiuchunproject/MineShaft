@@ -180,6 +180,77 @@ class ThetanArenaEnv(BaseEnv):
         loc,thershold = matching_with_screencap(tofind)
         pyautogui.moveTo(loc[0] ,loc[1],duration =0.2)
         pyautogui.click(button='left',duration=0.2)
+	
+	'''
+	Determine if the Tutorial has started
+	'''
+	
+	'''
+	opencv read the image by file path for matching
+	'''
+	tofind = cv.imread('../SourcePictures/entertutor2.png',cv.IMREAD_UNCHANGED) 
+	'''
+	wait for 5 seconds as the game maybe loading
+	'''
+	time.sleep(5)
+	'''
+	time.time() return the current time
+	start_time store the current time 
+	'''
+	start_time = time.time()
+	'''
+	set a boolean to determind if the tutorial game is started
+	'''
+	tutor_started = False
+	'''
+	use a while loop to keep matching the screen capture and the required image
+	the loop will go on at most 20 seconds
+	if there is no match with thershold larger than 0.7 after 20seconds,
+	it is determinded that the tutorial is not started
+	'''
+	while time.time()-start_time <20 and tutor_started == False:
+		loc,thershold = matching_with_screencap(tofind) 
+		if thershold >0.7:
+			tutor_started= True
+	
+	'''
+	Determine if the Tutorial has finished
+	
+	only run if the tutorial is started
+	'''
+	if tutor_started : 
+		'''
+		since the game last for 3 minites, the matching will start after that 
+		'''
+		time.sleep(180)		
+		'''
+		opencv read the image by file path for matching
+		'''
+		
+		tofind = cv.imread('../SourcePictures/finishtutor.png',cv.IMREAD_UNCHANGED) 
+		
+		'''
+		similarly, set a boolean to determind if the game is finished and record the time
+		'''
+		
+		start_time = time.time()
+		tutor_ended = False
+		
+		'''
+		
+		use a while loop to keep matching the screen capture and the required image
+		the loop will go on at most 60 seconds
+		if there is no match with thershold larger than 0.7 after 60seconds,
+		it is determinded that the tutorial is not finished
+	
+		'''
+		 
+		while time.time()-start_time <60 and tutor_ended == False:
+			loc,thershold = matching_with_screencap(tofind) 
+			if thershold >0.7:
+				tutor_ended= True
+		
+	
          
         
     def _end_game(self):
