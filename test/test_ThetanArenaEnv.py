@@ -24,6 +24,6 @@ class ThetanArenaEnvTestCase(unittest.TestCase):
 		coordinate of game window)
 		"""
 		expected = np.asarray(pyautogui.size()) * np.asarray(self.args);
-		self.env._mouse_click(*self.args);
+		self.env._mouse_move(self.args);
 		result = np.asarray(pyautogui.position());
 		self.assertTrue(np.abs(expected - result) < 2);
