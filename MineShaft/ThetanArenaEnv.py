@@ -1,5 +1,11 @@
 from .BaseEnv import BaseEnv
 import os
+import time
+import os
+import numpy as np
+import pyautogui
+import cv2 as cv
+from cv_matching import cv_matching
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=BaseEnv.IO_MODE.FULL_CONTROL,
@@ -81,65 +87,6 @@ class ThetanArenaEnv(BaseEnv):
         self.p = subprocess.Popen([filepath,progname])
 
     def _enter_match(self):  
-        """
-	the method requires an image parameter which is in numpy.ndarray format
-	then it compares the image with screen capture
-	"""
-	import time
-	import os
-	import numpy as np
-	import pyautogui
-	import cv2 as cv
-
-
-	def matching_with_screencap(tofind):
-	    """
-	    screen capture using pyautogui
-	    """
-	    screen = pyautogui.screenshot()
-
-	    """
-	    change the capture to numpy array
-	    """
-	    img = np.array(screen)
-
-	    """
-	    since the matchtemplate() function requires 2 images
-	    with same format
-	    so the below code is to convert the images to RBG format
-	    """
-
-	    tofind = cv.cvtColor(tofind, cv.COLOR_BGR2RGB)
-
-	    background = cv.cvtColor(img, cv.COLOR_BGR2RGB)
-
-	    """
-	    the below opencv function matchTemplate() receive 3 parameters,
-	    first 2 are images in
-	    numpy array, the third one is the opencv comparison algorithm.
-	    The function returns
-	    a grayscale image, where each pixel denotes how much does
-	    the neighbourhood of that pixel
-	    match with template.
-	    """
-	    result = cv.matchTemplate(background, tofind, cv.TM_CCOEFF_NORMED)
-	    """
-	    the below minMaxLoc() function receives a parameter which is a
-	    grayscale image
-	    then return 4 parameters:
-	    1. the  thershold value of minimum match objects
-	    2. the  thershold value of maximum match objects
-	    3. the  coordinates of minimu match objects
-	    4. the  coordinates of maximum match objects
-	    """
-	    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-	    """
-	    the methond only returns the thershold value and location of
-	    the most suitable matching object
-	    """
-	    return max_loc, max_val
-
-
 	"""
 	change the current directory to the script folder so that relative
 	path can be used
@@ -157,7 +104,7 @@ class ThetanArenaEnv(BaseEnv):
 	"""
 	using the above method
 	"""
-	loc, thershold = matching_with_screencap(tofind)
+	loc, thershold = cv_matching.matching_with_screencap(tofind)
 
 	"""
 	using pyautogui to click the obtained coordinates
@@ -170,7 +117,7 @@ class ThetanArenaEnv(BaseEnv):
 	"""
 
 	tofind = cv.imread("../SourcePictures/deathmatch2.png", cv.IMREAD_UNCHANGED)
-	loc2, thershold = matching_with_screencap(tofind)
+	loc2, thershold = cv_matching.matching_with_screencap(tofind)
 	if thershold > 0.7:
 	    pyautogui.moveTo(loc2[0] + 250, loc2[1], duration=0.2)
 	    pyautogui.click(button="left", duration=0.2)
@@ -181,7 +128,7 @@ class ThetanArenaEnv(BaseEnv):
 		"../SourcePictures/deathmatch2.png",
 		cv.IMREAD_UNCHANGED)
 	    time.sleep(2)
-	    loc2, thershold = matching_with_screencap(tofind)
+	    loc2, thershold = cv_matching.matching_with_screencap(tofind)
 	if thershold < 0.6:
 	    print("no deathmatch game mode")
 	    exit()
@@ -225,7 +172,7 @@ class ThetanArenaEnv(BaseEnv):
 	it is determinded that the tutorial is not started
 	"""
 	while time.time() - start_time < 20 and not tutor_started:
-	    loc, thershold = matching_with_screencap(tofind)
+	    loc, thershold = cv_matching.matching_with_screencap(tofind)
 	    if thershold > 0.7:
 		tutor_started = True
 
