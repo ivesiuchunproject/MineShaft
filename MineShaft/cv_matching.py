@@ -8,6 +8,10 @@ class cv_matching:
 
     @staticmethod
     def matching_with_screencap(tofind):
+        """
+        the method requires an image parameter which is in numpy.ndarray format
+        then it compares the image with screen capture
+        """
 
  
         '''
