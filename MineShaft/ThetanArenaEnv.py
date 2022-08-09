@@ -1,11 +1,11 @@
 from .BaseEnv import BaseEnv
 import subprocess
 import os
-import time
 import cv2
 import mss
 import numpy
 import pyautogui
+import pygetwindow as gw
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=BaseEnv.IO_MODE.FULL_CONTROL,
@@ -46,33 +46,25 @@ class ThetanArenaEnv(BaseEnv):
     
     def _screen_cap(self):
         """
-        This is the function to capture screen by getting default full screen resolution.
-        Capture is return in format of numpy.array in CHW and RGB.
-        
-        Returns color, img.shape
+        This is the function to capture screen from the game - Thetan Arena.
+        pygetwindow is used to get the coordinates and resolution of game by matching with WindowsWithTitle('Thetan Arena').
+
+        Returns
+        -------
+        captured image in format of numpy.array in CHW
         
         """
+		
         with mss.mss() as sct:
-        x, y = pyautogui.size()
-        monitor = {"top": 0, "left": 0, "width": x, "height": y}
-        
-        while "Screen capturing":
-            last_time = time.time()
-            FRAME_RATE = 30.0 
+            gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
+            monitor = {"top": gameWindow.top, "left": gameWindow.left, "width": gameWindow.width, "height": gameWindow.height}
 
             img = numpy.array(sct.grab(monitor))
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
-            cv2.imshow("OpenCV/Numpy normal", img)
 
-            color = img[y-1, x-1]
-            img = numpy.transpose(img, (2, 0, 1))
+            rgb = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB) 
+            rgb2 = numpy.transpose(rgb, (2,0,1))
 
-            delay = max(0, (1 / FRAME_RATE - (time.time() - last_time)) * 1000)  
-            # print ("Delay time: " + str(delay))
-
-            break
-
-            return color, img.shape
+            return rgb2
     
     def _keyboard_input(self, action):
         # scan and find keyboard action
