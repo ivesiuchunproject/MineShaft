@@ -16,7 +16,8 @@ class ThetanArenaEnv(BaseEnv):
                  explore_space=BaseEnv.EXPLORE_MODE.FULL):
         """This is the code of start game
 
-        Use try and catch statement to catch exception when the game is not installed in the provided path,
+        Use try and catch statement to catch exception
+        when the game is not installed in the provided path,
         then raise the exception for the upper level to handle.
 
         The hardcode path to open the game:
@@ -24,11 +25,6 @@ class ThetanArenaEnv(BaseEnv):
         """
         super(ThetanArenaEnv, self).__init__()
 
-        """
-        use try and catch statement to catch exception 
-        when the game is not installed in the provided path, 
-        then raise the exception for the upper level to handle
-        """
         try:
             self._start_game()
         except:
@@ -47,9 +43,10 @@ class ThetanArenaEnv(BaseEnv):
         pass
 
     def _screen_cap(self):
-        """This is the function to capture screen from the game - Thetan Arena.
+        """This is the function to capture screen from the game Thetan Arena.
 
-        pygetwindow is used to get the coordinates and resolution of game by matching with WindowsWithTitle('Thetan Arena').
+        pygetwindow is used to get the coordinates and resolution of game
+        by matching with WindowsWithTitle('Thetan Arena').
 
         Returns
         -------
@@ -59,7 +56,10 @@ class ThetanArenaEnv(BaseEnv):
 		
         with mss.mss() as sct:
             gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
-            monitor = {"top": gameWindow.top, "left": gameWindow.left, "width": gameWindow.width, "height": gameWindow.height}
+            monitor = {"top": gameWindow.top,
+                       "left": gameWindow.left,
+                       "width": gameWindow.width,
+                       "height": gameWindow.height}
 
             img = np.array(sct.grab(monitor))
 
@@ -96,11 +96,11 @@ class ThetanArenaEnv(BaseEnv):
         pass
 
     def _start_game(self):
-        """
-        This is the code for start game
+        """This is the code for starting game
 
-        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
-        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+        and
+        program name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
         is hardcode.
         """
 
