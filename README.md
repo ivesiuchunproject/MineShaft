@@ -39,7 +39,7 @@ to prevent reject of pull request ( 🚧 `400 Bad Request`) and make both of us 
 - [ ] Move the mouse to the given coordinate.
 - [ ] Input right click or left click event.
 ### Start game
-- [ ] With the help of computer vision and “autogui” keyboard/mouse control (Robotic Process Automation), enter a match with a specified character.
+- [x] With the help of computer vision and “autogui” keyboard/mouse control (Robotic Process Automation), enter a match with a specified character.
 - [ ] Determine if the game has started.
 - [ ] Determine if the game has finished.
 ### Generate random action
