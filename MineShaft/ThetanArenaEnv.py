@@ -38,10 +38,10 @@ class ThetanArenaEnv(BaseEnv):
                                                 dtype=np.uint8)
 
             gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
-            monitor = {"top": gameWindow.top,
-                       "left": gameWindow.left,
-                       "width": gameWindow.width,
-                       "height": gameWindow.height}
+            self.monitor = {"top": gameWindow.top,
+                            "left": gameWindow.left,
+                            "width": gameWindow.width,
+                            "height": gameWindow.height}
 
             self.sct = mss.mss()
             img = np.array(self.sct.grab(self.monitor))
@@ -102,10 +102,28 @@ class ThetanArenaEnv(BaseEnv):
 
     def _keyboard_release(self, ascii_list):
         pass
+    
+    def _mouse_move(self, width, height):
+        """Move mouse to the location of the percentage of game window
+        width and height.
 
-    def _mouse_move(self, action):
-        pass
-
+        Parameters
+        ----------
+        width : int
+          percentage of screen width
+        height : int
+          percentage of screen height
+        """
+        x = (self.monitor['left'] +
+             width *
+             abs(self.monitor['right'] -
+                 self.monitor['left']))
+        y = (self.monitor['top'] +
+             height *
+             abs(self.monitor['bottom'] -
+                 self.monitor['top']))
+        pyautogui.moveTo(x, y, duration=0.2)
+    
     def _mouse_click(self, left, right):
         # scan and find mouse action
         # mouse press #self._mouse_press(left, right)
