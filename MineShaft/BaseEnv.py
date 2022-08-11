@@ -80,8 +80,8 @@ class BaseEnv(gym.Env):
         # Define action and observation space
         # They must be gym.spaces objects
         if io_mode == IO_MODE.FULL_CONTROL:
-            # 101 keyboard + mouse (move + click + scroll)
-            ACTION_SHAPE = (2, 101 + (2 + 2 + 1))
+            # press & release channels; 104 keyboard + mouse (move + click + scroll)
+            ACTION_SHAPE = (2, 104 + (2 + 2 + 1))
             # screen height
             HEIGHT = 512
             # screen width
