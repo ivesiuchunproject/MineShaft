@@ -1,20 +1,23 @@
-from .BaseEnv import BaseEnv
-import subprocess
 import os
 import time
-import os
+import subprocess
+
+import mss
 import numpy as np
 import pyautogui
-import cv2 as cv
-from cv_matching import cv_matching
+import cv2
+import pygetwindow as gw
 
+from .BaseEnv import BaseEnv
+from cv_matching import cv_matching
 
 class ThetanArenaEnv(BaseEnv):
     def __init__(self, io_mode=BaseEnv.IO_MODE.FULL_CONTROL,
                  explore_space=BaseEnv.EXPLORE_MODE.FULL):
         """This is the code of start game
 
-        Use try and catch statement to catch exception when the game is not installed in the provided path,
+        Use try and catch statement to catch exception
+        when the game is not installed in the provided path,
         then raise the exception for the upper level to handle.
 
         The hardcode path to open the game:
@@ -22,11 +25,6 @@ class ThetanArenaEnv(BaseEnv):
         """
         super(ThetanArenaEnv, self).__init__()
 
-        """
-        use try and catch statement to catch exception 
-        when the game is not installed in the provided path, 
-        then raise the exception for the upper level to handle
-        """
         try:
             self._start_game()
         except:
@@ -45,7 +43,30 @@ class ThetanArenaEnv(BaseEnv):
         pass
 
     def _screen_cap(self):
-        pass
+        """This is the function to capture screen from the game Thetan Arena.
+
+        pygetwindow is used to get the coordinates and resolution of game
+        by matching with WindowsWithTitle('Thetan Arena').
+
+        Returns
+        -------
+        captured image in format of numpy.array in CHW
+        
+        """
+		
+        with mss.mss() as sct:
+            gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
+            monitor = {"top": gameWindow.top,
+                       "left": gameWindow.left,
+                       "width": gameWindow.width,
+                       "height": gameWindow.height}
+
+            img = np.array(sct.grab(monitor))
+
+            rgb = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB) 
+            rgb2 = np.transpose(rgb, (2,0,1))
+
+            return rgb2
 
     def _keyboard_input(self, action):
         # scan and find keyboard action
@@ -75,11 +96,11 @@ class ThetanArenaEnv(BaseEnv):
         pass
 
     def _start_game(self):
-        """
-        This is the code for start game
+        """This is the code for starting game
 
-        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
-        and programme name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe" 
+        The file path "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
+        and
+        program name "C:\\Program Files (x86)\\Thetan Arena\\Thetan Arena.exe"
         is hardcode.
         """
 
@@ -100,8 +121,8 @@ class ThetanArenaEnv(BaseEnv):
         opencv read the find match image by file path
         """
 
-        tofind = cv.imread(
-            "../SourcePictures/findmatch2.png", cv.IMREAD_UNCHANGED)
+        tofind = cv2.imread(
+            "../SourcePictures/findmatch2.png", cv2.IMREAD_UNCHANGED)
 
         """
         using the above method
@@ -118,8 +139,8 @@ class ThetanArenaEnv(BaseEnv):
         similarly, using pyautogui to click the obtained coordinates
         """
 
-        tofind = cv.imread(
-            "../SourcePictures/deathmatch2.png", cv.IMREAD_UNCHANGED)
+        tofind = cv2.imread(
+            "../SourcePictures/deathmatch2.png", cv2.IMREAD_UNCHANGED)
         loc2, thershold = cv_matching.matching_with_screencap(tofind)
         if thershold > 0.7:
             pyautogui.moveTo(loc2[0] + 250, loc2[1], duration=0.2)
@@ -127,9 +148,9 @@ class ThetanArenaEnv(BaseEnv):
 
         else:
             pyautogui.dragTo(loc[0] - 400, loc[1], duration=0.2, button="left")
-            tofind = cv.imread(
+            tofind = cv2.imread(
                 "../SourcePictures/deathmatch2.png",
-                cv.IMREAD_UNCHANGED)
+                cv2.IMREAD_UNCHANGED)
             time.sleep(2)
             loc2, thershold = cv_matching.matching_with_screencap(tofind)
         if thershold < 0.6:
@@ -142,7 +163,7 @@ class ThetanArenaEnv(BaseEnv):
         again, using the above method to find and click the tutorial image
         """
 
-        tofind = cv.imread("../SourcePictures/tutor.png", cv.IMREAD_UNCHANGED)
+        tofind = cv2.imread("../SourcePictures/tutor.png", cv2.IMREAD_UNCHANGED)
         loc, thershold = matching_with_screencap(tofind)
         pyautogui.moveTo(loc[0], loc[1], duration=0.2)
         pyautogui.click(button="left", duration=0.2)
@@ -154,8 +175,8 @@ class ThetanArenaEnv(BaseEnv):
         """
         opencv read the image by file path for matching
         """
-        tofind = cv.imread(
-            "../SourcePictures/entertutor2.png", cv.IMREAD_UNCHANGED)
+        tofind = cv2.imread(
+            "../SourcePictures/entertutor2.png", cv2.IMREAD_UNCHANGED)
         """
         wait for 5 seconds as the game maybe loading
         """
@@ -194,9 +215,9 @@ class ThetanArenaEnv(BaseEnv):
             opencv read the image by file path for matching
             """
 
-            tofind = cv.imread(
+            tofind = cv2.imread(
                 "../SourcePictures/finishtutor.png",
-                cv.IMREAD_UNCHANGED)
+                cv2.IMREAD_UNCHANGED)
 
             """
             similarly, set a boolean to determind if the game is finished and
