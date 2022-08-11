@@ -29,6 +29,29 @@ class ThetanArenaEnv(BaseEnv):
             self._start_game()
         except:
             raise Exception("the game is not installed")
+        
+        if io_mode == IO_MODE.FULL_CONTROL:
+            # obs_shape in (HEIGHT, WIDTH, N_CHANNELS)
+            obs_shape = (512, 512, 4)
+            self.observation_space = spaces.Box(low=0, high=255,
+                                                shape=obs_shape,
+                                                dtype=np.uint8)
+
+            gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
+            monitor = {"top": gameWindow.top,
+                       "left": gameWindow.left,
+                       "width": gameWindow.width,
+                       "height": gameWindow.height}
+
+            self.sct = mss.mss()
+            img = np.array(self.sct.grab(self.monitor))
+            ratio = max(img.shape) // 512
+            self.dsize = (img.shape[1] // ratio,
+                          img.shape[0] // ratio)
+            self.left_right_pad = (obs_shape[1] - self.dsize[1]) // 2
+            self.top_bottom_pad = (obs_shape[0] - self.dsize[0]) // 2
+
+        return self.action_space, self.observation_space
 
     def step(self, action):
         pass
@@ -45,28 +68,28 @@ class ThetanArenaEnv(BaseEnv):
     def _screen_cap(self):
         """This is the function to capture screen from the game Thetan Arena.
 
-        pygetwindow is used to get the coordinates and resolution of game
+        `pygetwindow` is used to get the coordinates and resolution of game
         by matching with WindowsWithTitle('Thetan Arena').
+        
+        The image will then be resized to the specified size defined in 
+        `observation_space` with the same ratio as original image by padding
+        with black pixels.
 
         Returns
         -------
-        captured image in format of numpy.array in CHW
+        numpy.array
+            Captured RGBA image with format of numpy.array in HWC
         
         """
-		
-        with mss.mss() as sct:
-            gameWindow = gw.getWindowsWithTitle('Thetan Arena')[0]
-            monitor = {"top": gameWindow.top,
-                       "left": gameWindow.left,
-                       "width": gameWindow.width,
-                       "height": gameWindow.height}
-
-            img = np.array(sct.grab(monitor))
-
-            rgb = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB) 
-            rgb2 = np.transpose(rgb, (2,0,1))
-
-            return rgb2
+        img = np.array(self.sct.grab(self.monitor))
+        img = cv2.resize(img, self.dsize)
+        return cv2.copyMakeBorder(img,
+                                  self.top_bottom_pad,
+                                  self.top_bottom_pad,
+                                  self.left_right_pad,
+                                  self.left_right_pad,
+                                  cv2.BORDER_CONSTANT,
+                                  value=[0, 0, 0])
 
     def _keyboard_input(self, action):
         # scan and find keyboard action
