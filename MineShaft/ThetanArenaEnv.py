@@ -50,20 +50,35 @@ class ThetanArenaEnv(BaseEnv):
                           img.shape[0] // ratio)
             self.left_right_pad = (obs_shape[1] - self.dsize[1]) // 2
             self.top_bottom_pad = (obs_shape[0] - self.dsize[0]) // 2
+            
+        self.info = {'waiting': True}
+        self.done = False
+        self.rewards = 0
 
         return self.action_space, self.observation_space
 
     def step(self, action):
-        pass
+        self._take_action(action)
+        obs = self._screen_cap()
+        self._check_if_game_session_started()
+        self._check_if_game_session_ended()
+        return obs, self.rewards, self.done, self.info
 
     def reset(self):
-        pass
+        self._reset_game()
+        self.enter_match()
+        self.info = {'waiting': True}
 
     def close(self):
-        pass
+        self._end_game()
 
     def _take_action(self, action):
-        pass
+        self._mouse_move(action[0,-5:-3])
+        self._mouse_press(action[0,-3:-1])
+        self._keyboard_press(action[0,:-5])
+        self._mouse_move(action[1,-5:-3])
+        self._mouse_release(action[1,-3:-1])
+        self._keyboard_release(action[1:-5])
 
     def _screen_cap(self):
         """This is the function to capture screen from the game Thetan Arena.
@@ -190,7 +205,7 @@ class ThetanArenaEnv(BaseEnv):
 
         self.p = subprocess.Popen([filepath, progname])
 
-    def _enter_match(self):
+    def enter_match(self):
         """
         change the current directory to the script folder so that relative
         path can be used
@@ -327,6 +342,15 @@ class ThetanArenaEnv(BaseEnv):
         This is the code for end game
         """
         self.p.terminate()
+        
+    def _check_if_game_session_started(self):
+        # self.info = {'waiting': False}
+        pass
+    
+    def _check_if_game_session_ended(self):
+        # self.done = True
+        # self.rewards = self._screen_get_total_score()
+        pass
 
     def _reset_game(self):
         pass
