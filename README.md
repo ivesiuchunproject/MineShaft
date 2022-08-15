@@ -36,8 +36,8 @@ to prevent reject of pull request ( 🚧 `400 Bad Request`) and make both of us 
 - [x] Find and capture part of the screen only the game window of Thetan Arena.
 ### Input action
 - [ ] Input given key as keyboard press or keydown or keyup event.
-- [ ] Move the mouse to the given coordinate.
-- [ ] Input right click or left click event.
+- [x] Move the mouse to the given coordinate.
+- [x] Input right click or left click event.
 ### Start game
 - [x] With the help of computer vision and “autogui” keyboard/mouse control (Robotic Process Automation), enter a match with a specified character.
 - [ ] Determine if the game has started.
