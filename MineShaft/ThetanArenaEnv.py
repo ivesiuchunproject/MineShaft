@@ -142,40 +142,38 @@ class ThetanArenaEnv(BaseEnv):
           ```
         """
         # mouse press
-        self._mouse_press(*action[0])
+        self._mouse_press(*(action[0] > 0))
         # mouse release
-        self._mouse_release(*action[1])
+        self._mouse_release(*(action[1] > 0))
 
     def _mouse_press(self, left, right):
-        """Press and hold mouse left and right button by probability value.
+        """Press and hold mouse left and right button by boolean.
 
         Parameters
         ----------
-        left : float
-          probability of left click, trigger left click if value greater than 0
-        right : float
-          probability of right click, trigger right click if value greater than 0
+        left : bool
+          flag for left click, trigger left click if true
+        right : bool
+          flag for right click, trigger right click if true
         """
-        if left > 0:
+        if left:
             pyautogui.mouseDown()
-        if right > 0:
+        if right:
             pyautogui.mouseDown(button='right')
 
     def _mouse_release(self, left, right):
-        """Release mouse left and right button by probability value.
+        """Release mouse left and right button by boolean.
 
         Parameters
         ----------
-        left : float
-          probability of releasing left click,
-          trigger release if value greater than 0
-        right : float
-          probability of releasing right click,
-          trigger release if value greater than 0
+        left : bool
+          flag for releasing left click, trigger release if true
+        right : bool
+          flag for releasing right click, trigger release if true
         """
-        if left > 0:
+        if left:
             pyautogui.mouseUp()
-        if right > 0:
+        if right:
             pyautogui.mouseUp(button='right')
 
     def _start_game(self):
