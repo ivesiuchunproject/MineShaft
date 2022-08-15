@@ -109,9 +109,9 @@ class ThetanArenaEnv(BaseEnv):
 
         Parameters
         ----------
-        width : int
+        width : float
           percentage of screen width
-        height : int
+        height : float
           percentage of screen height
         """
         x = (self.monitor['left'] +
@@ -124,17 +124,59 @@ class ThetanArenaEnv(BaseEnv):
                  self.monitor['top']))
         pyautogui.moveTo(x, y, duration=0.2)
     
-    def _mouse_click(self, left, right):
-        # scan and find mouse action
-        # mouse press #self._mouse_press(left, right)
-        # mouse release #self._mouse_release(left, right)
-        pass
+    def _mouse_click(self, action):
+        """Click mouse left and right button by probability value.
+
+        Parameters
+        ----------
+        action : numpy.array
+          `numpy.array` with shape of `(2, 2)` contain the probabilities of
+          left and right mouse down/up, trigger left mouse down/up if value
+          of the field greater than 0
+          ```
+          # definition of teh fields
+          [
+            [left_mouse_down, right_mouse_down],
+            [left_mouse_up, right_mouse_up]
+          ]
+          ```
+        """
+        # mouse press
+        self._mouse_press(*action[0])
+        # mouse release
+        self._mouse_release(*action[1])
 
     def _mouse_press(self, left, right):
-        pass
+        """Press and hold mouse left and right button by probability value.
+
+        Parameters
+        ----------
+        left : float
+          probability of left click, trigger left click if value greater than 0
+        right : float
+          probability of right click, trigger right click if value greater than 0
+        """
+        if left > 0:
+            pyautogui.mouseDown()
+        if right > 0:
+            pyautogui.mouseDown(button='right')
 
     def _mouse_release(self, left, right):
-        pass
+        """Release mouse left and right button by probability value.
+
+        Parameters
+        ----------
+        left : float
+          probability of releasing left click,
+          trigger release if value greater than 0
+        right : float
+          probability of releasing right click,
+          trigger release if value greater than 0
+        """
+        if left > 0:
+            pyautogui.mouseUp()
+        if right > 0:
+            pyautogui.mouseUp(button='right')
 
     def _start_game(self):
         """This is the code for starting game
