@@ -36,10 +36,10 @@ class ThetanArenaEnvTestCase(unittest.TestCase):
 		There is no way to determine if the click, press, release works well.
 		Assume if no error occur is good then pass the test.
 		"""
-		self.env._mouse_click(False, True);
-		self.env._mouse_click(True, False);
-		self.env._mouse_click(True, True);
-		self.env._mouse_click(False, False);
+		self.env._mouse_click(np.asarray([0, 0.4]));
+		self.env._mouse_click(np.asarray([0.5, -0.4]));
+		self.env._mouse_click(np.asarray([0.6, 0.6]));
+		self.env._mouse_click(np.asarray([0, -0.4]));
 		self.env._mouse_press(True, False);
 		self.env._mouse_release(True, False);
 		self.env._mouse_press(False, True);
@@ -51,6 +51,7 @@ class ThetanArenaEnvTestCase(unittest.TestCase):
 		There is no way to determine if the combination works well.
 		Assume if no error occur is good then pass the test.
 		"""
+		self.env._mouse_move((0, 0));
 		self.env._mouse_press(True, False);
 		expected = np.asarray(pyautogui.size()) * np.asarray(self.mouse_x_y);
 		self.env._mouse_move(self.mouse_x_y);
