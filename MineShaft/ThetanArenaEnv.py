@@ -264,6 +264,17 @@ class ThetanArenaEnv(BaseEnv):
         pyautogui.moveTo(loc[0], loc[1], duration=0.2)
         pyautogui.click(button="left", duration=0.2)
 
+       
+
+    def _end_game(self):
+        """
+        This is the code for end game
+        """
+        self.p.terminate()
+        
+    def _check_if_game_session_started(self):
+        # self.info = {'waiting': False}
+        pass
         """
         Determine if the Tutorial has started
         """
@@ -296,13 +307,18 @@ class ThetanArenaEnv(BaseEnv):
             loc, thershold = cv_matching.matching_with_screencap(tofind)
             if thershold > 0.7:
                 tutor_started = True
-
+        if tutor_started:
+            self.info['waiting'] = False
+    def _check_if_game_session_ended(self):
+        # self.done = True
+        # self.rewards = self._screen_get_total_score()
+        pass
         """
         Determine if the Tutorial has finished
 
         only run if the tutorial is started
         """
-        if tutor_started:
+        if not self.info['waiting']:
             """
             since the game last for 3 minites, the matching will start after that
             """
@@ -336,21 +352,8 @@ class ThetanArenaEnv(BaseEnv):
             loc, thershold = matching_with_screencap(tofind)
             if thershold > 0.7:
                 tutor_ended = True
-
-    def _end_game(self):
-        """
-        This is the code for end game
-        """
-        self.p.terminate()
-        
-    def _check_if_game_session_started(self):
-        # self.info = {'waiting': False}
-        pass
-    
-    def _check_if_game_session_ended(self):
-        # self.done = True
-        # self.rewards = self._screen_get_total_score()
-        pass
+        if tutor_ended:
+            self.done=True
 
     def _reset_game(self):
         pass
