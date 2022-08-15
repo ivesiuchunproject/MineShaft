@@ -40,7 +40,7 @@ class WindowCapture():
                        gameWindow.left,
                        gameWindow.width,
                        gameWindow.height)
-        print(monitor)
+        
         top, left, width, height = monitor
         '''
         take the screenshot of the game window
